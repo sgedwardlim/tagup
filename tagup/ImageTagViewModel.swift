@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageTagRegistrationViewModel {
+class ImageTagViewModel {
     
     var imageTag: ImageTag?
     

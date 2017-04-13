@@ -11,7 +11,7 @@ import UIKit
 /*
  *  Holds all the displayed elements seen on a generic TagRegistrationViewController
  */
-class TagRegistrationViewController: UIScrollViewController {
+class TagViewController: UIScrollViewController {
     // MARK: NavigationBar View Elements
     lazy var cancelButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelSelected))
@@ -47,6 +47,27 @@ class TagRegistrationViewController: UIScrollViewController {
         return field
     }()
     
+    // MARK: Properties
+    enum State {
+        // Holds all the possible states for a TagViewController at any point in time
+        case editable
+        case registration
+        case presentable
+    }
+    
+    // Gets the current state of the TagViewController
+    fileprivate var currentState: State
+    
+    // Inorder to instantiate this TagViewController,  a state is required
+    init(state: State) {
+        self.currentState = state
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -68,7 +89,7 @@ class TagRegistrationViewController: UIScrollViewController {
 /*
  *  Controller Actions for a generic TagRegistrationViewController
  */
-extension TagRegistrationViewController {
+extension TagViewController {
     
     // MARK: NavigationBar Items
     func handleCancelSelected() {

@@ -11,7 +11,7 @@ import UIKit
 /*
  *  Holds all the displayed elements seen on a ImageTagViewController
  */
-class ImageTagRegistrationViewController: TagRegistrationViewController {
+class ImageTagViewController: TagViewController {
     
     // MARK: UIView Elements
     lazy var uploadImageView: UIImageView = {
@@ -32,12 +32,12 @@ class ImageTagRegistrationViewController: TagRegistrationViewController {
     }()
     
     // MARK: Properties
-    fileprivate var imageTagRegistrationViewModel: ImageTagRegistrationViewModel?
+    fileprivate var imageTagRegistrationViewModel: ImageTagViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // new registration of a image tag, so nil is passed
-        imageTagRegistrationViewModel = ImageTagRegistrationViewModel(imageTag: nil)
+        imageTagRegistrationViewModel = ImageTagViewModel(imageTag: nil)
         setupViews()
     }
     
@@ -70,7 +70,7 @@ class ImageTagRegistrationViewController: TagRegistrationViewController {
 /*
  *  Holds all controller functions for ImageTagViewController
  */
-extension ImageTagRegistrationViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     // MARK: NavigationBar Items
     override func handleSaveSelected() {
         let title = titleField.text

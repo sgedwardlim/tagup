@@ -90,7 +90,7 @@ extension TagCollectionViewController {
         let imageButton = UIAlertAction(title: "Image", style: .default) { (action) in
             // image selected
             print("Image selected")
-            let imageTagRegistrationController = ImageTagRegistrationViewController()
+            let imageTagRegistrationController = ImageTagViewController(state: .registration)
             let nav = UINavigationController(rootViewController: imageTagRegistrationController)
             self.present(nav, animated: true, completion: nil)
         }
