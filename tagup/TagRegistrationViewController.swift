@@ -9,11 +9,21 @@
 import UIKit
 
 /*
- *  Holds all the displayed elements seen on a generic ImageTagViewController
+ *  Holds all the displayed elements seen on a generic TagRegistrationViewController
  */
 class TagRegistrationViewController: UIScrollViewController {
+    // MARK: NavbarView Elements
+    lazy var cancelButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelSelected))
+        return button
+    }()
     
-    // MARK: UIView Elements
+    lazy var saveButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveSelected))
+        return button
+    }()
+    
+    // MARK: ContentView Elements
     let titleField: UITextField = {
         let field = UITextField()
         field.placeholder = "Title"
@@ -31,6 +41,8 @@ class TagRegistrationViewController: UIScrollViewController {
     
     let notesField: UITextView = {
         let field = UITextView()
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.layer.borderWidth = 0.5
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
@@ -44,12 +56,25 @@ class TagRegistrationViewController: UIScrollViewController {
         contentView.addSubview(titleField)
         
         titleField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        titleField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        titleField.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        titleField.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        titleField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+        titleField.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
+        titleField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12).isActive = true
     }
 }
 
+/*
+ *  Controller Actions for a generic TagRegistrationViewController
+ */
+extension TagRegistrationViewController {
+    
+    func handleCancelSelected() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func handleSaveSelected() {
+        dismiss(animated: true, completion: nil)
+    }
+}
 
 
 
