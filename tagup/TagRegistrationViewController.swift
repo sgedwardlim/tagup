@@ -12,7 +12,7 @@ import UIKit
  *  Holds all the displayed elements seen on a generic TagRegistrationViewController
  */
 class TagRegistrationViewController: UIScrollViewController {
-    // MARK: NavbarView Elements
+    // MARK: NavigationBar View Elements
     lazy var cancelButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelSelected))
         return button
@@ -70,6 +70,7 @@ class TagRegistrationViewController: UIScrollViewController {
  */
 extension TagRegistrationViewController {
     
+    // MARK: NavigationBar Items
     func handleCancelSelected() {
         dismiss(animated: true, completion: nil)
     }

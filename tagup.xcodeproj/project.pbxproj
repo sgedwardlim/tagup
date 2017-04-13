@@ -14,6 +14,7 @@
 		2BB79E701E9F1482007FB002 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB79E6E1E9F1482007FB002 /* LaunchScreen.storyboard */; };
 		2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */; };
 		2BB79E7B1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */; };
+		2BB79E801E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E7F1E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2BB79E711E9F1482007FB002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewController.swift; sourceTree = "<group>"; };
 		2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTagRegistrationViewController.swift; sourceTree = "<group>"; };
+		2BB79E7F1E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTagRegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			children = (
 				2BB79E641E9F1482007FB002 /* TagRegistrationViewController.swift */,
 				2BB79E7D1E9F284E007FB002 /* Image ViewControllers */,
+				2BB79E7E1E9F2D84007FB002 /* ImageTag ViewModel */,
 			);
 			name = "Tag ViewControllers";
 			sourceTree = "<group>";
@@ -92,6 +95,14 @@
 				2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */,
 			);
 			name = "Image ViewControllers";
+			sourceTree = "<group>";
+		};
+		2BB79E7E1E9F2D84007FB002 /* ImageTag ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2BB79E7F1E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift */,
+			);
+			name = "ImageTag ViewModel";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +181,7 @@
 				2BB79E651E9F1482007FB002 /* TagRegistrationViewController.swift in Sources */,
 				2BB79E631E9F1482007FB002 /* AppDelegate.swift in Sources */,
 				2BB79E7B1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift in Sources */,
+				2BB79E801E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift in Sources */,
 				2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,8 +14,9 @@ import UIKit
 class ImageTagRegistrationViewController: TagRegistrationViewController {
     
     // MARK: UIView Elements
-    let uploadImageView: UIImageView = {
+    lazy var uploadImageView: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "upload_image_icon"))
+        iv.isUserInteractionEnabled = true
         iv.contentMode = .scaleToFill
         iv.backgroundColor = .lightGray
     
@@ -24,12 +25,19 @@ class ImageTagRegistrationViewController: TagRegistrationViewController {
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
         
+        iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleUploadImageSelected)))
+        
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
+    // MARK: Properties
+    fileprivate var imageTagRegistrationViewModel: ImageTagRegistrationViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // new registration of a image tag, so nil is passed
+        imageTagRegistrationViewModel = ImageTagRegistrationViewModel(imageTag: nil)
         setupViews()
     }
     
@@ -59,7 +67,37 @@ class ImageTagRegistrationViewController: TagRegistrationViewController {
     }
 }
 
-
+/*
+ *  Holds all controller functions for ImageTagViewController
+ */
+extension ImageTagRegistrationViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    // MARK: NavigationBar Items
+    override func handleSaveSelected() {
+        let title = titleField.text
+        let image = uploadImageView.image
+        let notes = notesField.text
+        imageTagRegistrationViewModel?.saveImageTag(title, image, notes)
+        print("Items saved")
+    }
+    
+    // MARK: Selector Functions
+    func handleUploadImageSelected() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+    
+    // MARK: ImagePicker Controls
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let imageSelected = info[UIImagePickerControllerOriginalImage] as! UIImage
+        uploadImageView.image = imageSelected
+        dismiss(animated: true, completion: nil)
+    }
+}
 
 
 
