@@ -77,7 +77,7 @@ extension ImageTagRegistrationViewController: UINavigationControllerDelegate, UI
         let image = uploadImageView.image
         let notes = notesField.text
         imageTagRegistrationViewModel?.saveImageTag(title, image, notes)
-        print("Items saved")
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: Selector Functions

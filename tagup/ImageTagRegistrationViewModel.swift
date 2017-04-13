@@ -19,11 +19,11 @@ class ImageTagRegistrationViewModel {
         return title
     }
     
-    var uploadedImage: UIImage? {
+    var uploadedImage: UIImage {
         guard let imageData = imageTag?.image else {
             return #imageLiteral(resourceName: "upload_image_icon") 
         }
-        return UIImage(data: imageData as Data)
+        return UIImage(data: imageData as Data)!
     }
     
     var notesText: String {

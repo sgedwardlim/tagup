@@ -15,6 +15,10 @@
 		2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */; };
 		2BB79E7B1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */; };
 		2BB79E801E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E7F1E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift */; };
+		2BB79E821E9F58A1007FB002 /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E811E9F58A1007FB002 /* TagCollectionViewController.swift */; };
+		2BB79E841E9F58A8007FB002 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E831E9F58A8007FB002 /* TagCell.swift */; };
+		2BB79E891E9F5A49007FB002 /* TagCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E881E9F5A49007FB002 /* TagCellViewModel.swift */; };
+		2BB79E8C1E9F5EDC007FB002 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E8B1E9F5EDC007FB002 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewController.swift; sourceTree = "<group>"; };
 		2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTagRegistrationViewController.swift; sourceTree = "<group>"; };
 		2BB79E7F1E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTagRegistrationViewModel.swift; sourceTree = "<group>"; };
+		2BB79E811E9F58A1007FB002 /* TagCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCollectionViewController.swift; sourceTree = "<group>"; };
+		2BB79E831E9F58A8007FB002 /* TagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		2BB79E881E9F5A49007FB002 /* TagCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCellViewModel.swift; sourceTree = "<group>"; };
+		2BB79E8B1E9F5EDC007FB002 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */,
+				2BB79E8B1E9F5EDC007FB002 /* DataManager.swift */,
 				2BB79E7C1E9F282E007FB002 /* Tag ViewControllers */,
 				2BB79E691E9F1482007FB002 /* tagup.xcdatamodeld */,
 				2BB79E791E9F1542007FB002 /* Supporting Files */,
@@ -82,9 +91,9 @@
 		2BB79E7C1E9F282E007FB002 /* Tag ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2BB79E8A1E9F5A69007FB002 /* Homepage */,
+				2BB79E871E9F5911007FB002 /* Image Tags */,
 				2BB79E641E9F1482007FB002 /* TagRegistrationViewController.swift */,
-				2BB79E7D1E9F284E007FB002 /* Image ViewControllers */,
-				2BB79E7E1E9F2D84007FB002 /* ImageTag ViewModel */,
 			);
 			name = "Tag ViewControllers";
 			sourceTree = "<group>";
@@ -103,6 +112,25 @@
 				2BB79E7F1E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift */,
 			);
 			name = "ImageTag ViewModel";
+			sourceTree = "<group>";
+		};
+		2BB79E871E9F5911007FB002 /* Image Tags */ = {
+			isa = PBXGroup;
+			children = (
+				2BB79E7D1E9F284E007FB002 /* Image ViewControllers */,
+				2BB79E7E1E9F2D84007FB002 /* ImageTag ViewModel */,
+			);
+			name = "Image Tags";
+			sourceTree = "<group>";
+		};
+		2BB79E8A1E9F5A69007FB002 /* Homepage */ = {
+			isa = PBXGroup;
+			children = (
+				2BB79E811E9F58A1007FB002 /* TagCollectionViewController.swift */,
+				2BB79E831E9F58A8007FB002 /* TagCell.swift */,
+				2BB79E881E9F5A49007FB002 /* TagCellViewModel.swift */,
+			);
+			name = Homepage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,12 +205,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BB79E821E9F58A1007FB002 /* TagCollectionViewController.swift in Sources */,
+				2BB79E8C1E9F5EDC007FB002 /* DataManager.swift in Sources */,
 				2BB79E6B1E9F1482007FB002 /* tagup.xcdatamodeld in Sources */,
 				2BB79E651E9F1482007FB002 /* TagRegistrationViewController.swift in Sources */,
 				2BB79E631E9F1482007FB002 /* AppDelegate.swift in Sources */,
 				2BB79E7B1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift in Sources */,
 				2BB79E801E9F2DAA007FB002 /* ImageTagRegistrationViewModel.swift in Sources */,
+				2BB79E891E9F5A49007FB002 /* TagCellViewModel.swift in Sources */,
 				2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */,
+				2BB79E841E9F58A8007FB002 /* TagCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
