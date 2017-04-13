@@ -59,8 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */,
-				2BB79E641E9F1482007FB002 /* TagRegistrationViewController.swift */,
-				2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */,
+				2BB79E7C1E9F282E007FB002 /* Tag ViewControllers */,
 				2BB79E691E9F1482007FB002 /* tagup.xcdatamodeld */,
 				2BB79E791E9F1542007FB002 /* Supporting Files */,
 			);
@@ -76,6 +75,23 @@
 				2BB79E711E9F1482007FB002 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2BB79E7C1E9F282E007FB002 /* Tag ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2BB79E641E9F1482007FB002 /* TagRegistrationViewController.swift */,
+				2BB79E7D1E9F284E007FB002 /* Image ViewControllers */,
+			);
+			name = "Tag ViewControllers";
+			sourceTree = "<group>";
+		};
+		2BB79E7D1E9F284E007FB002 /* Image ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */,
+			);
+			name = "Image ViewControllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +330,7 @@
 				2BB79E761E9F1482007FB002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

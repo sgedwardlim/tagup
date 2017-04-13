@@ -53,6 +53,9 @@ class TagRegistrationViewController: UIScrollViewController {
     }
     
     private func setupViews() {
+        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.rightBarButtonItem = saveButton
+        
         contentView.addSubview(titleField)
         
         titleField.heightAnchor.constraint(equalToConstant: 30).isActive = true
