@@ -93,7 +93,6 @@
 			children = (
 				2BB79E8A1E9F5A69007FB002 /* Homepage */,
 				2BB79E871E9F5911007FB002 /* Image Tags */,
-				2BB79E641E9F1482007FB002 /* TagViewController.swift */,
 			);
 			name = "Tag ViewControllers";
 			sourceTree = "<group>";
@@ -117,6 +116,7 @@
 		2BB79E871E9F5911007FB002 /* Image Tags */ = {
 			isa = PBXGroup;
 			children = (
+				2BB79E641E9F1482007FB002 /* TagViewController.swift */,
 				2BB79E7D1E9F284E007FB002 /* Image ViewControllers */,
 				2BB79E7E1E9F2D84007FB002 /* ImageTag ViewModel */,
 			);

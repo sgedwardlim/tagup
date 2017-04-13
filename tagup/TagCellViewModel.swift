@@ -10,7 +10,7 @@ import UIKit
 
 class TagCellViewModel {
     
-    var tag: ImageTag
+    var tag: Tag
     
     var titleText: String {
         guard let title = tag.title else {
@@ -20,13 +20,19 @@ class TagCellViewModel {
     }
     
     var thumbnail: UIImage {
-        guard let image = tag.image else {
+        switch tag {
+        case is ImageTag:
+            let imageTag = tag as! ImageTag
+            guard let image = imageTag.image else {
+                return #imageLiteral(resourceName: "upload_image_icon")
+            }
+            return UIImage(data: image as Data)!
+        default:
             return #imageLiteral(resourceName: "upload_image_icon")
         }
-        return UIImage(data: image as Data)!
     }
     
-    init(tag: ImageTag) {
+    init(_ tag: Tag) {
         self.tag = tag
     }
     

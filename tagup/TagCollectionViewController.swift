@@ -56,6 +56,7 @@ class TagCollectionViewController: UICollectionViewController {
         collectionView?.register(TagCell.self, forCellWithReuseIdentifier: tagCellId)
     }
     
+    // MARK: CollectionView DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let count = tags?.count {
             return count
@@ -67,6 +68,24 @@ class TagCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tagCellId, for: indexPath) as! TagCell
         cell.tagCellViewModel = tags?[indexPath.item]
         return cell
+    }
+    
+    // MARK: CollectionView Delegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Check what type of tag was selected
+        let cell = collectionView.cellForItem(at: indexPath) as! TagCell
+        let tag = cell.tagCellViewModel?.tag
+        // Instantiate the correct type of TagViewController in the editable state
+        switch tag {
+        case is ImageTag:
+            let viewModel = ImageTagViewModel(imageTag: tag as? ImageTag)
+            let imageTagViewController = ImageTagViewController(state: .editable, viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: imageTagViewController)
+            present(nav, animated: true, completion: nil)
+            print("Image Tag bro")
+        default:
+            print("error broski")
+        }
     }
 }
 

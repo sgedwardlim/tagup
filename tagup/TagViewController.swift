@@ -56,7 +56,7 @@ class TagViewController: UIScrollViewController {
     }
     
     // Gets the current state of the TagViewController
-    fileprivate var currentState: State
+    var currentState: State
     
     // Inorder to instantiate this TagViewController,  a state is required
     init(state: State) {

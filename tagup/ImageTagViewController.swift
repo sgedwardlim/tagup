@@ -31,13 +31,27 @@ class ImageTagViewController: TagViewController {
         return iv
     }()
     
+    // MARK: Editable State UIView Elements
+    lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete", for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
+        button.backgroundColor = .red
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: Properties
-    fileprivate var imageTagRegistrationViewModel: ImageTagViewModel?
+    fileprivate var viewModel: ImageTagViewModel?
+    
+    convenience init(state: State, viewModel :ImageTagViewModel? = nil) {
+        self.init(state: state)
+        self.viewModel = viewModel
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // new registration of a image tag, so nil is passed
-        imageTagRegistrationViewModel = ImageTagViewModel(imageTag: nil)
         setupViews()
     }
     
@@ -45,6 +59,37 @@ class ImageTagViewController: TagViewController {
         // Needed to display UIView elements under UINavigationBar
         edgesForExtendedLayout = []
         
+        switch currentState {
+        case .editable:
+            setupEditableStateView()
+            print("edit state")
+        case .registration:
+            // new registration of a image tag, so nil is passed
+            viewModel = ImageTagViewModel(imageTag: nil)
+            setupRegisterStateView()
+            print("registration state")
+        case .presentable:
+            print("presentable state")
+        }
+    }
+    
+    /*
+     *  Sets up how the view will look in an editable state,
+     *  will look exactly the same as the registration state,
+     *  with the exception of a delete button at the bottom of contentView
+    */
+    private func setupEditableStateView() {
+        titleField.text = viewModel?.titleText
+        uploadImageView.image = viewModel?.uploadedImage
+        notesField.text = viewModel?.notesText
+        
+        setupRegisterStateView()
+    }
+    
+    /*
+     *  Sets up how the view will look in an editable state
+     */
+    private func setupRegisterStateView() {
         contentView.addSubview(uploadImageView)
         contentView.addSubview(notesLabel)
         contentView.addSubview(notesField)
@@ -53,7 +98,7 @@ class ImageTagViewController: TagViewController {
         uploadImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12).isActive = true
         uploadImageView.topAnchor.constraint(equalTo: titleField.bottomAnchor).isActive = true
         uploadImageView.heightAnchor.constraint(equalToConstant: 400).isActive = true
-
+        
         notesLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         notesLabel.topAnchor.constraint(equalTo: uploadImageView.bottomAnchor, constant: 8).isActive = true
         notesLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
@@ -76,7 +121,7 @@ extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerC
         let title = titleField.text
         let image = uploadImageView.image
         let notes = notesField.text
-        imageTagRegistrationViewModel?.saveImageTag(title, image, notes)
+        viewModel?.saveImageTag(title, image, notes)
         dismiss(animated: true, completion: nil)
     }
     

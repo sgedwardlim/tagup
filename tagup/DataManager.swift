@@ -20,7 +20,7 @@ class DataManager {
         do {
             let imageTags = try context.fetch(ImageTag.fetchRequest())
             for tag in imageTags {
-                let viewModel = TagCellViewModel(tag: tag as! ImageTag)
+                let viewModel = TagCellViewModel(tag as! Tag)
                 tags.append(viewModel)
             }
         } catch {
