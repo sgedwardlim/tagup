@@ -8,6 +8,11 @@
 
 import UIKit
 
+/*
+ *  A helper class that contains all the elements needed to enable scrolling on
+ *  a generic view, all classes inheriting from UIScrollViewController will add
+ *  all its children views into the contentView.
+ */
 class UIScrollViewController: UIViewController {
     
     let scrollView: UIScrollView = {

@@ -8,11 +8,29 @@
 
 import UIKit
 
-class ImagePinViewController: UIScrollViewController {
+/*
+ *  Holds all the displayed elements seen on a generic ImageTagViewController
+ */
+class ImageTagRegistrationViewController: UIScrollViewController {
     
+    // MARK: UIView Elements
     let titleField: UITextField = {
         let field = UITextField()
         field.placeholder = "Title"
+        field.translatesAutoresizingMaskIntoConstraints = false
+        return field
+    }()
+    
+    let notesLabel: UILabel = {
+        let label = UILabel()
+        label.text = "notes: "
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let notesField: UITextView = {
+        let field = UITextView()
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
