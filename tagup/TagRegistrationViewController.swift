@@ -11,7 +11,7 @@ import UIKit
 /*
  *  Holds all the displayed elements seen on a generic ImageTagViewController
  */
-class ImageTagRegistrationViewController: UIScrollViewController {
+class TagRegistrationViewController: UIScrollViewController {
     
     // MARK: UIView Elements
     let titleField: UITextField = {
