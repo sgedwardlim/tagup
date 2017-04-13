@@ -13,6 +13,7 @@
 		2BB79E6D1E9F1482007FB002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BB79E6C1E9F1482007FB002 /* Assets.xcassets */; };
 		2BB79E701E9F1482007FB002 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB79E6E1E9F1482007FB002 /* LaunchScreen.storyboard */; };
 		2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */; };
+		2BB79E7B1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2BB79E6F1E9F1482007FB002 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BB79E711E9F1482007FB002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewController.swift; sourceTree = "<group>"; };
+		2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTagRegistrationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */,
 				2BB79E641E9F1482007FB002 /* TagRegistrationViewController.swift */,
+				2BB79E7A1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift */,
 				2BB79E691E9F1482007FB002 /* tagup.xcdatamodeld */,
 				2BB79E791E9F1542007FB002 /* Supporting Files */,
 			);
@@ -150,6 +153,7 @@
 				2BB79E6B1E9F1482007FB002 /* tagup.xcdatamodeld in Sources */,
 				2BB79E651E9F1482007FB002 /* TagRegistrationViewController.swift in Sources */,
 				2BB79E631E9F1482007FB002 /* AppDelegate.swift in Sources */,
+				2BB79E7B1E9F19C6007FB002 /* ImageTagRegistrationViewController.swift in Sources */,
 				2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
