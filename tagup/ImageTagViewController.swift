@@ -42,12 +42,26 @@ class ImageTagViewController: TagViewController {
         return button
     }()
     
-    // MARK: Properties
-    fileprivate var viewModel: ImageTagViewModel?
+    // MARK: Presentable State UIView Elements
+    lazy var editButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEditSelected))
+        return button
+    }()
     
-    convenience init(state: State, viewModel :ImageTagViewModel? = nil) {
-        self.init(state: state)
+    // MARK: Properties
+    fileprivate var viewModel: ImageTagViewModel
+    
+    /*
+     *  Every Instantiation of ImageTagViewController must have a viewModel
+     *  along with the state of itself
+    */
+    init(state: State, viewModel: ImageTagViewModel) {
         self.viewModel = viewModel
+        super.init(state: state)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -59,37 +73,19 @@ class ImageTagViewController: TagViewController {
         // Needed to display UIView elements under UINavigationBar
         edgesForExtendedLayout = []
         
+        // Setup the view based off the current state of the view
         switch currentState {
         case .editable:
             setupEditableStateView()
-            print("edit state")
+            print("editable state")
         case .registration:
-            // new registration of a image tag, so nil is passed
-            viewModel = ImageTagViewModel(imageTag: nil)
             setupRegisterStateView()
             print("registration state")
         case .presentable:
+            setupPresentableStateView()
             print("presentable state")
         }
-    }
-    
-    /*
-     *  Sets up how the view will look in an editable state,
-     *  will look exactly the same as the registration state,
-     *  with the exception of a delete button at the bottom of contentView
-    */
-    private func setupEditableStateView() {
-        titleField.text = viewModel?.titleText
-        uploadImageView.image = viewModel?.uploadedImage
-        notesField.text = viewModel?.notesText
         
-        setupRegisterStateView()
-    }
-    
-    /*
-     *  Sets up how the view will look in an editable state
-     */
-    private func setupRegisterStateView() {
         contentView.addSubview(uploadImageView)
         contentView.addSubview(notesLabel)
         contentView.addSubview(notesField)
@@ -110,6 +106,49 @@ class ImageTagViewController: TagViewController {
         notesField.rightAnchor.constraint(equalTo: notesLabel.rightAnchor).isActive = true
         notesField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
     }
+    
+    /*
+     *  Sets up how the view will look in an editable state,
+     *  will look exactly the same as the registration state,
+     *  with the exception of a delete button at the bottom of contentView
+    */
+    private func setupEditableStateView() {
+        setupFieldsWithData()
+    }
+    
+    /*
+     *  Sets up how the view will look in an registration state,
+     *  will look exactly the same as the editable state, with the
+     *  exception of a delete button at the bottom of contentView
+     */
+    private func setupRegisterStateView() {
+        setupFieldsWithData()
+    }
+    
+    /*
+     *  Sets up how the view will look in an presentable state,
+     *  every element in the view in this state should be uneditable
+     */
+    private func setupPresentableStateView() {
+        // Setup navigationBar buttons
+        navigationItem.rightBarButtonItem = editButton
+        // Setup fields for presentable state
+        titleField.isEnabled = false
+        notesField.isEditable = false
+        uploadImageView.isUserInteractionEnabled = false
+        
+        setupFieldsWithData()
+    }
+    
+    /*
+     *  Loads up data from the viewModel into the respective fields of
+     *  ImageTagViewController
+    */
+    private func setupFieldsWithData() {
+        titleField.text = viewModel.titleText
+        uploadImageView.image = viewModel.uploadedImage
+        notesField.text = viewModel.notesText
+    }
 }
 
 /*
@@ -121,8 +160,14 @@ extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerC
         let title = titleField.text
         let image = uploadImageView.image
         let notes = notesField.text
-        viewModel?.saveImageTag(title, image, notes)
+        viewModel.saveImageTag(title, image, notes)
         dismiss(animated: true, completion: nil)
+    }
+    
+    func handleEditSelected() {
+        let imageTagViewController = ImageTagViewController(state: .editable, viewModel: viewModel)
+        let nav = UINavigationController(rootViewController: imageTagViewController)
+        present(nav, animated: true, completion: nil)
     }
     
     // MARK: Selector Functions

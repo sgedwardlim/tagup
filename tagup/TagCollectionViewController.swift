@@ -16,12 +16,6 @@ class TagCollectionViewController: UICollectionViewController {
         return button
     }()
     
-    var activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     // MARK: Properties
     fileprivate let tagCellId = "tagCellId"
     fileprivate let cellsPerRow: CGFloat = 2.0
@@ -41,16 +35,12 @@ class TagCollectionViewController: UICollectionViewController {
         DataManager.shared.fetchAllTags { [weak self] tags in
             self?.tags = tags
             self?.collectionView?.reloadData()
-//            self?.activityIndicator.stopAnimating()
         }
     }
     
     private func setupViews() {
-//        activityIndicator.startAnimating()
-        
         navigationItem.rightBarButtonItem = addButton
         
-//        collectionView?.backgroundView = activityIndicator
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(TagCell.self, forCellWithReuseIdentifier: tagCellId)
@@ -79,12 +69,11 @@ class TagCollectionViewController: UICollectionViewController {
         switch tag {
         case is ImageTag:
             let viewModel = ImageTagViewModel(imageTag: tag as? ImageTag)
-            let imageTagViewController = ImageTagViewController(state: .editable, viewModel: viewModel)
+            let imageTagViewController = ImageTagViewController(state: .presentable, viewModel: viewModel)
             let nav = UINavigationController(rootViewController: imageTagViewController)
             present(nav, animated: true, completion: nil)
-            print("Image Tag bro")
         default:
-            print("error broski")
+            print("End of the world if this prints")
         }
     }
 }
@@ -108,8 +97,8 @@ extension TagCollectionViewController {
         
         let imageButton = UIAlertAction(title: "Image", style: .default) { (action) in
             // image selected
-            print("Image selected")
-            let imageTagRegistrationController = ImageTagViewController(state: .registration)
+            let viewModel = ImageTagViewModel(imageTag: nil)
+            let imageTagRegistrationController = ImageTagViewController(state: .registration, viewModel: viewModel)
             let nav = UINavigationController(rootViewController: imageTagRegistrationController)
             self.present(nav, animated: true, completion: nil)
         }

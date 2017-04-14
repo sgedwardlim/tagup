@@ -10,7 +10,7 @@ import UIKit
 
 class TagCell: UICollectionViewCell {
     
-    // MARK: Properties
+    // MARK: UIView Elements
     var tagCellViewModel: TagCellViewModel? {
         didSet {
             guard let viewModel = tagCellViewModel else { return }
@@ -75,6 +75,13 @@ class TagCell: UICollectionViewCell {
         titleLabel.bottomAnchor.constraint(equalTo: tagContainer.bottomAnchor, constant: -4).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: thumbnailImage.leftAnchor, constant: 4).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: thumbnailImage.rightAnchor).isActive = true
+    }
+}
+
+// MARK: Handle User Actions
+extension TagCell {
+    func handleEditSelected() {
+        print("edit selected")
     }
 }
 

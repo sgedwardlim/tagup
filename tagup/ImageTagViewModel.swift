@@ -33,27 +33,14 @@ class ImageTagViewModel {
         return notes
     }
     
+    /*
+     *  Initalize ImageTagViewModel with a Tag
+    */
     init(imageTag: ImageTag?) {
         self.imageTag = imageTag
     }
     
     func saveImageTag(_ title: String?,_ image: UIImage?,_ notes: String?) {
-        let delegate = (UIApplication.shared.delegate as! AppDelegate)
-        let context = delegate.persistentContainer.viewContext
-        let imageTag = ImageTag(context: context)
-        
-        // Initalize properties of ImageTag
-        imageTag.title = title
-        imageTag.notes = notes
-        
-        if image != #imageLiteral(resourceName: "upload_image_icon") {
-            // Image has been uploaded
-            imageTag.image = UIImagePNGRepresentation(image!)! as NSData
-        } else {
-            imageTag.image = nil
-        }
-        
-        delegate.saveContext()
+        DataManager.shared.saveImageTag(title, image, notes)
     }
-    
 }

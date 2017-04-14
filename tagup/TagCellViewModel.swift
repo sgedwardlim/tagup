@@ -35,5 +35,4 @@ class TagCellViewModel {
     init(_ tag: Tag) {
         self.tag = tag
     }
-    
 }
