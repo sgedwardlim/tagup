@@ -48,4 +48,18 @@ class DataManager {
         
         delegate.saveContext()
     }
+    
+    func deleteImageTag(_ imageTag: ImageTag) {
+        let delegate = (UIApplication.shared.delegate as! AppDelegate)
+        let context = delegate.persistentContainer.viewContext
+        
+        context.delete(imageTag)
+        delegate.saveContext()
+    }
 }
+
+
+
+
+
+

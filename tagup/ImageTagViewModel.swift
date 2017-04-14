@@ -43,4 +43,9 @@ class ImageTagViewModel {
     func saveImageTag(_ title: String?,_ image: UIImage?,_ notes: String?) {
         DataManager.shared.saveImageTag(title, image, notes)
     }
+    
+    func deleteImageTag() {
+        guard let tag = imageTag else { return }
+        DataManager.shared.deleteImageTag(tag)
+    }
 }

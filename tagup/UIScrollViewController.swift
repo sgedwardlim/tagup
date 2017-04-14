@@ -15,6 +15,7 @@ import UIKit
  */
 class UIScrollViewController: UIViewController {
     
+    // MARK: UIView Elements
     let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.backgroundColor = .white
@@ -29,6 +30,12 @@ class UIScrollViewController: UIViewController {
         return view
     }()
     
+    // MARK: Properties
+    var scrollViewTopAnchor: NSLayoutConstraint!
+    var scrollViewBottomAnchor: NSLayoutConstraint!
+    var scrollViewLeftAnchor: NSLayoutConstraint!
+    var scrollViewRightAnchor: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -38,10 +45,15 @@ class UIScrollViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        scrollViewTopAnchor = scrollView.topAnchor.constraint(equalTo: view.topAnchor)
+        scrollViewBottomAnchor = scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        scrollViewLeftAnchor = scrollView.leftAnchor.constraint(equalTo: view.leftAnchor)
+        scrollViewRightAnchor = scrollView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        
+        scrollViewTopAnchor.isActive = true
+        scrollViewBottomAnchor.isActive = true
+        scrollViewLeftAnchor.isActive = true
+        scrollViewRightAnchor.isActive = true
         
         contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true

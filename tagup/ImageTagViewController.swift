@@ -35,8 +35,6 @@ class ImageTagViewController: TagViewController {
     lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle("Delete", for: .normal)
-        button.layer.cornerRadius = 5
-        button.layer.masksToBounds = true
         button.backgroundColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -114,6 +112,18 @@ class ImageTagViewController: TagViewController {
     */
     private func setupEditableStateView() {
         setupFieldsWithData()
+        // Add the delete button to the superview of the scrollview,
+        // keep the delete button on screen at all times
+        view.addSubview(deleteButton)
+        
+        // Repostion scrollview to not extend to the bounds of screen
+        scrollViewBottomAnchor.isActive = false
+        scrollView.bottomAnchor.constraint(equalTo: deleteButton.topAnchor).isActive = true
+        
+        deleteButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        deleteButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     /*
