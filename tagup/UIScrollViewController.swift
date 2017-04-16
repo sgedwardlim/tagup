@@ -25,7 +25,7 @@ class UIScrollViewController: UIViewController {
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor(hex: 0xF9F7F7)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

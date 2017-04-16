@@ -18,7 +18,7 @@ class ImageTagViewController: TagViewController {
         let iv = UIImageView(image: #imageLiteral(resourceName: "upload_image_icon"))
         iv.isUserInteractionEnabled = true
         iv.contentMode = .scaleToFill
-        iv.backgroundColor = .lightGray
+//        iv.backgroundColor = .lightGray
     
         iv.layer.borderWidth = 0.5
         iv.layer.borderColor = UIColor(white: 0.99, alpha: 1.0).cgColor
@@ -36,6 +36,7 @@ class ImageTagViewController: TagViewController {
         let button = UIButton()
         button.setTitle("Delete", for: .normal)
         button.backgroundColor = .red
+        button.addTarget(self, action: #selector(handleDeleteSelected), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -75,34 +76,21 @@ class ImageTagViewController: TagViewController {
         switch currentState {
         case .editable:
             setupEditableStateView()
+            
             print("editable state")
         case .registration:
             setupRegisterStateView()
+            setupUploadImageViewLayout()
+            setupNotesLabelLayout()
+            setupNotesViewLayout()
             print("registration state")
         case .presentable:
             setupPresentableStateView()
+            setupUploadImageViewLayout()
+            setupNotesLabelLayout()
+            setupNotesViewLayout()
             print("presentable state")
         }
-        
-        contentView.addSubview(uploadImageView)
-        contentView.addSubview(notesLabel)
-        contentView.addSubview(notesField)
-        
-        uploadImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
-        uploadImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12).isActive = true
-        uploadImageView.topAnchor.constraint(equalTo: titleField.bottomAnchor).isActive = true
-        uploadImageView.heightAnchor.constraint(equalToConstant: 400).isActive = true
-        
-        notesLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        notesLabel.topAnchor.constraint(equalTo: uploadImageView.bottomAnchor, constant: 8).isActive = true
-        notesLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
-        notesLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12).isActive = true
-        
-        notesField.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        notesField.topAnchor.constraint(equalTo: notesLabel.bottomAnchor).isActive = true
-        notesField.leftAnchor.constraint(equalTo: notesLabel.leftAnchor).isActive = true
-        notesField.rightAnchor.constraint(equalTo: notesLabel.rightAnchor).isActive = true
-        notesField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
     }
     
     /*
@@ -111,7 +99,51 @@ class ImageTagViewController: TagViewController {
      *  with the exception of a delete button at the bottom of contentView
     */
     private func setupEditableStateView() {
-        setupFieldsWithData()
+        populateFieldsWithData()
+        
+        setupUploadImageViewLayout()
+        setupNotesLabelLayout()
+        // Place the delete button as the last item instead of noteTextView
+        contentView.addSubview(notesField)
+        
+        notesField.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        notesField.topAnchor.constraint(equalTo: notesLabel.bottomAnchor).isActive = true
+        notesField.leftAnchor.constraint(equalTo: notesLabel.leftAnchor).isActive = true
+        notesField.rightAnchor.constraint(equalTo: notesLabel.rightAnchor).isActive = true
+        
+        view.addSubview(deleteButton)
+        
+        deleteButton.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        deleteButton.topAnchor.constraint(equalTo: notesField.bottomAnchor, constant: 20).isActive = true
+        deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+        deleteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/10).isActive = true
+        
+    }
+    
+    /*
+     *  Sets up how the view will look in an registration state,
+     *  will look exactly the same as the editable state, with the
+     *  exception of a delete button at the bottom of contentView
+     */
+    private func setupRegisterStateView() {
+        populateFieldsWithData()
+    }
+    
+    /*
+     *  Sets up how the view will look in an presentable state,
+     *  every element in the view in this state should be uneditable
+     */
+    private func setupPresentableStateView() {
+        populateFieldsWithData()
+        
+        // Setup navigationBar buttons
+        navigationItem.rightBarButtonItem = editButton
+        // Setup fields for presentable state
+        titleField.isEnabled = false
+        notesField.isEditable = false
+        uploadImageView.isUserInteractionEnabled = false
+        
         // Add the delete button to the superview of the scrollview,
         // keep the delete button on screen at all times
         view.addSubview(deleteButton)
@@ -123,41 +155,45 @@ class ImageTagViewController: TagViewController {
         deleteButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        deleteButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    }
-    
-    /*
-     *  Sets up how the view will look in an registration state,
-     *  will look exactly the same as the editable state, with the
-     *  exception of a delete button at the bottom of contentView
-     */
-    private func setupRegisterStateView() {
-        setupFieldsWithData()
-    }
-    
-    /*
-     *  Sets up how the view will look in an presentable state,
-     *  every element in the view in this state should be uneditable
-     */
-    private func setupPresentableStateView() {
-        // Setup navigationBar buttons
-        navigationItem.rightBarButtonItem = editButton
-        // Setup fields for presentable state
-        titleField.isEnabled = false
-        notesField.isEditable = false
-        uploadImageView.isUserInteractionEnabled = false
-        
-        setupFieldsWithData()
+        deleteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/10).isActive = true
     }
     
     /*
      *  Loads up data from the viewModel into the respective fields of
      *  ImageTagViewController
     */
-    private func setupFieldsWithData() {
+    private func populateFieldsWithData() {
         titleField.text = viewModel.titleText
         uploadImageView.image = viewModel.uploadedImage
         notesField.text = viewModel.notesText
+    }
+    
+    private func setupUploadImageViewLayout() {
+        contentView.addSubview(uploadImageView)
+        
+        uploadImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
+        uploadImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12).isActive = true
+        uploadImageView.topAnchor.constraint(equalTo: titleField.bottomAnchor).isActive = true
+        uploadImageView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+    }
+    
+    private func setupNotesLabelLayout() {
+        contentView.addSubview(notesLabel)
+        
+        notesLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        notesLabel.topAnchor.constraint(equalTo: uploadImageView.bottomAnchor, constant: 8).isActive = true
+        notesLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
+        notesLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12).isActive = true
+    }
+    
+    private func setupNotesViewLayout() {
+        contentView.addSubview(notesField)
+        
+        notesField.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        notesField.topAnchor.constraint(equalTo: notesLabel.bottomAnchor).isActive = true
+        notesField.leftAnchor.constraint(equalTo: notesLabel.leftAnchor).isActive = true
+        notesField.rightAnchor.constraint(equalTo: notesLabel.rightAnchor).isActive = true
+        notesField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
     }
 }
 
@@ -185,6 +221,33 @@ extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerC
         let picker = UIImagePickerController()
         picker.delegate = self
         present(picker, animated: true, completion: nil)
+    }
+    
+    func handleDeleteSelected() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let deleteButton = UIAlertAction(title: "Delete Tag", style: .destructive) { (action) in
+            self.viewModel.deleteImageTag()
+            // navigate back to the homeview controller, number of dismiss 
+            // called depends on the currentState of the view
+            switch self.currentState {
+            case .presentable:
+                self.dismiss(animated: true, completion: nil)
+            case .editable:
+                self.dismiss(animated: false, completion: nil)
+                self.dismiss(animated: true, completion: nil)
+            default:
+                print("End of the world if this prints")
+            }
+            
+            print("delete selected")
+        }
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(deleteButton)
+        alert.addAction(cancelButton)
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: ImagePicker Controls

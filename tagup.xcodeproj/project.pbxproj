@@ -19,6 +19,7 @@
 		2BB79E841E9F58A8007FB002 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E831E9F58A8007FB002 /* TagCell.swift */; };
 		2BB79E891E9F5A49007FB002 /* TagCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E881E9F5A49007FB002 /* TagCellViewModel.swift */; };
 		2BB79E8C1E9F5EDC007FB002 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E8B1E9F5EDC007FB002 /* DataManager.swift */; };
+		2BB79E8E1EA351FB007FB002 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E8D1EA351FB007FB002 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		2BB79E831E9F58A8007FB002 /* TagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		2BB79E881E9F5A49007FB002 /* TagCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCellViewModel.swift; sourceTree = "<group>"; };
 		2BB79E8B1E9F5EDC007FB002 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		2BB79E8D1EA351FB007FB002 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				2BB79E771E9F14F0007FB002 /* UIScrollViewController.swift */,
 				2BB79E8B1E9F5EDC007FB002 /* DataManager.swift */,
+				2BB79E8D1EA351FB007FB002 /* Extensions.swift */,
 				2BB79E7C1E9F282E007FB002 /* Tag ViewControllers */,
 				2BB79E691E9F1482007FB002 /* tagup.xcdatamodeld */,
 				2BB79E791E9F1542007FB002 /* Supporting Files */,
@@ -214,6 +217,7 @@
 				2BB79E801E9F2DAA007FB002 /* ImageTagViewModel.swift in Sources */,
 				2BB79E891E9F5A49007FB002 /* TagCellViewModel.swift in Sources */,
 				2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */,
+				2BB79E8E1EA351FB007FB002 /* Extensions.swift in Sources */,
 				2BB79E841E9F58A8007FB002 /* TagCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
