@@ -30,26 +30,12 @@ class DataManager {
         completion(tags)
     }
     
-    func saveImageTag(_ title: String?,_ image: UIImage?,_ notes: String?) {
+    func saveImageTag(tag: Tag) {
         let delegate = (UIApplication.shared.delegate as! AppDelegate)
-        let context = delegate.persistentContainer.viewContext
-        let imageTag = ImageTag(context: context)
-        
-        // Initalize properties of ImageTag
-        imageTag.title = title
-        imageTag.notes = notes
-        
-        if image != #imageLiteral(resourceName: "upload_image_icon") {
-            // Image has been uploaded
-            imageTag.image = UIImagePNGRepresentation(image!)! as NSData
-        } else {
-            imageTag.image = nil
-        }
-        
         delegate.saveContext()
     }
     
-    func deleteImageTag(_ imageTag: ImageTag) {
+    func deleteImageTag(_ imageTag: Tag) {
         let delegate = (UIApplication.shared.delegate as! AppDelegate)
         let context = delegate.persistentContainer.viewContext
         

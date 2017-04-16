@@ -75,6 +75,10 @@ class ImageTagViewController: TagViewController {
         setupViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        populateFieldsWithData()
+    }
+    
     private func setupViews() {
         // Needed to display UIView elements under UINavigationBar
         edgesForExtendedLayout = []
@@ -99,8 +103,6 @@ class ImageTagViewController: TagViewController {
      *  with the exception of a delete button at the bottom of contentView
     */
     private func setupEditableStateView() {
-        populateFieldsWithData()
-        
         setupUploadImageViewLayout()
         setupNotesLabelLayout()
         // Place the delete button as the last item instead of noteTextView
@@ -127,7 +129,6 @@ class ImageTagViewController: TagViewController {
      *  exception of a delete button at the bottom of contentView
      */
     private func setupRegisterStateView() {
-        populateFieldsWithData()
         setupUploadImageViewLayout()
         setupNotesLabelLayout()
         setupNotesViewLayout()
@@ -138,7 +139,6 @@ class ImageTagViewController: TagViewController {
      *  every element in the view in this state should be uneditable
      */
     private func setupPresentableStateView() {
-        populateFieldsWithData()
         setupUploadImageViewLayout()
         setupNotesLabelLayout()
         setupNotesViewLayout()
