@@ -18,7 +18,7 @@ class ImageTagViewController: TagViewController {
         let iv = UIImageView(image: #imageLiteral(resourceName: "upload_image_icon"))
         iv.isUserInteractionEnabled = true
         iv.contentMode = .scaleToFill
-//        iv.backgroundColor = .lightGray
+        iv.backgroundColor = .white
     
         iv.layer.borderWidth = 0.5
         iv.layer.borderColor = UIColor(white: 0.99, alpha: 1.0).cgColor
@@ -35,7 +35,11 @@ class ImageTagViewController: TagViewController {
     lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle("Delete", for: .normal)
-        button.backgroundColor = .red
+        button.setTitleColor(UIColor(hex: 0xE84A5F), for: .normal)
+        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor  = UIColor.lightGray.cgColor
+        
         button.addTarget(self, action: #selector(handleDeleteSelected), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -49,13 +53,16 @@ class ImageTagViewController: TagViewController {
     
     // MARK: Properties
     fileprivate var viewModel: ImageTagViewModel
+    // Holds a reference to the presentableState VC for deletion handling
+    fileprivate var presentableViewController: ImageTagViewController?
     
     /*
      *  Every Instantiation of ImageTagViewController must have a viewModel
      *  along with the state of itself
     */
-    init(state: State, viewModel: ImageTagViewModel) {
+    init(state: State, viewModel: ImageTagViewModel, presentableVC: ImageTagViewController? = nil) {
         self.viewModel = viewModel
+        self.presentableViewController = presentableVC
         super.init(state: state)
     }
     
@@ -76,19 +83,12 @@ class ImageTagViewController: TagViewController {
         switch currentState {
         case .editable:
             setupEditableStateView()
-            
             print("editable state")
         case .registration:
             setupRegisterStateView()
-            setupUploadImageViewLayout()
-            setupNotesLabelLayout()
-            setupNotesViewLayout()
             print("registration state")
         case .presentable:
             setupPresentableStateView()
-            setupUploadImageViewLayout()
-            setupNotesLabelLayout()
-            setupNotesViewLayout()
             print("presentable state")
         }
     }
@@ -128,6 +128,9 @@ class ImageTagViewController: TagViewController {
      */
     private func setupRegisterStateView() {
         populateFieldsWithData()
+        setupUploadImageViewLayout()
+        setupNotesLabelLayout()
+        setupNotesViewLayout()
     }
     
     /*
@@ -136,6 +139,9 @@ class ImageTagViewController: TagViewController {
      */
     private func setupPresentableStateView() {
         populateFieldsWithData()
+        setupUploadImageViewLayout()
+        setupNotesLabelLayout()
+        setupNotesViewLayout()
         
         // Setup navigationBar buttons
         navigationItem.rightBarButtonItem = editButton
@@ -211,7 +217,8 @@ extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerC
     }
     
     func handleEditSelected() {
-        let imageTagViewController = ImageTagViewController(state: .editable, viewModel: viewModel)
+        // Initalize editable stateVC with reference to current VC
+        let imageTagViewController = ImageTagViewController(state: .editable, viewModel: viewModel, presentableVC: self)
         let nav = UINavigationController(rootViewController: imageTagViewController)
         present(nav, animated: true, completion: nil)
     }
@@ -228,19 +235,18 @@ extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerC
         
         let deleteButton = UIAlertAction(title: "Delete Tag", style: .destructive) { (action) in
             self.viewModel.deleteImageTag()
-            // navigate back to the homeview controller, number of dismiss 
-            // called depends on the currentState of the view
+            // navigate back to the homeview controller, way of dismissal
+            // depends on the currentState of the view
             switch self.currentState {
             case .presentable:
                 self.dismiss(animated: true, completion: nil)
             case .editable:
-                self.dismiss(animated: false, completion: nil)
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: false, completion: {
+                    self.presentableViewController?.dismiss(animated: true, completion: nil)
+                })
             default:
                 print("End of the world if this prints")
             }
-            
-            print("delete selected")
         }
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel)

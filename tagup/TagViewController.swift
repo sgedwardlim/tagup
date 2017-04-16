@@ -10,6 +10,15 @@ import UIKit
 
 /*
  *  Holds all the displayed elements seen on a generic TagRegistrationViewController
+ *  all types of TAGS should inherhit from this class and adhere to common layout rules
+ *  1.) titleField is anchored to the top of view
+ *  2.) content unique to children view should be next
+ *  3.) notesLabel and notesField should come right after each other and placed towards
+        the bottom of the children views
+    4.) notesField's or last view element (delete button) bottom anchor must be tied to
+        contentView's bottomAnchor as such, ex...
+        notesField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
+ 
  */
 class TagViewController: UIScrollViewController {
     // MARK: NavigationBar View Elements
