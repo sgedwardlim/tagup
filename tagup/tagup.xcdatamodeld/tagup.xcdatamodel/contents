@@ -3,6 +3,10 @@
     <entity name="ImageTag" representedClassName="ImageTag" parentEntity="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
+    <entity name="LinkTag" representedClassName="LinkTag" parentEntity="Tag" syncable="YES" codeGenerationType="class">
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Tag" representedClassName="Tag" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -10,5 +14,6 @@
     <elements>
         <element name="ImageTag" positionX="36" positionY="131" width="126" height="58"/>
         <element name="Tag" positionX="-54" positionY="9" width="128" height="73"/>
+        <element name="LinkTag" positionX="-137" positionY="131" width="128" height="73"/>
     </elements>
 </model>

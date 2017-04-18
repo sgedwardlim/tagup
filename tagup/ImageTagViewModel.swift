@@ -41,32 +41,27 @@ class ImageTagViewModel {
     }
     
     func saveImageTag(_ title: String?,_ image: UIImage?,_ notes: String?) {
+
+        let delegate = (UIApplication.shared.delegate as! AppDelegate)
+        let context = delegate.persistentContainer.viewContext
         // Check to see if the imageTag variable is set, if set,
-        // then user is in editing state
-        if imageTag != nil {
-            // user is editing existing tag
-            imageTag?.title = title
-            imageTag?.notes = notes
-            imageTag?.image = getImageData(from: image)
-        } else {
-            // user is creating a new tag
-            let delegate = (UIApplication.shared.delegate as! AppDelegate)
-            let context = delegate.persistentContainer.viewContext
-            let imageTag = ImageTag(context: context)
-            
-            // Initalize properties of ImageTag
-            imageTag.title = title
-            imageTag.notes = notes
-            imageTag.image = getImageData(from: image)
+        // then edit the current tag, else create a new tag to be saved
+        if imageTag == nil {
+            imageTag = ImageTag(context: context)
         }
         
-        guard let tag = imageTag else { return }
-        DataManager.shared.saveImageTag(tag: tag)
+        imageTag?.title = title
+        imageTag?.notes = notes
+        imageTag?.image = getImageData(from: image)
+        
+        // usually the saving of the data should be handled by DataManager,
+        // but coredata dosent allow for saving of data in such a way
+        delegate.saveContext()
     }
     
     func deleteImageTag() {
         guard let tag = imageTag else { return }
-        DataManager.shared.deleteImageTag(tag)
+        DataManager.shared.deleteTag(tag)
     }
     
     private func getImageData(from image: UIImage?) -> NSData? {

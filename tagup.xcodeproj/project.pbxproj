@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B29450D1EA543260067FDF7 /* LinkTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29450C1EA543260067FDF7 /* LinkTagViewModel.swift */; };
+		2B29450F1EA577090067FDF7 /* LinkTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29450E1EA577090067FDF7 /* LinkTagViewController.swift */; };
 		2BB79E631E9F1482007FB002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E621E9F1482007FB002 /* AppDelegate.swift */; };
 		2BB79E651E9F1482007FB002 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E641E9F1482007FB002 /* TagViewController.swift */; };
 		2BB79E6B1E9F1482007FB002 /* tagup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E691E9F1482007FB002 /* tagup.xcdatamodeld */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B29450C1EA543260067FDF7 /* LinkTagViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkTagViewModel.swift; sourceTree = "<group>"; };
+		2B29450E1EA577090067FDF7 /* LinkTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkTagViewController.swift; sourceTree = "<group>"; };
 		2BB79E5F1E9F1482007FB002 /* tagup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tagup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BB79E621E9F1482007FB002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BB79E641E9F1482007FB002 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B2945091EA49FA80067FDF7 /* Link Tags */ = {
+			isa = PBXGroup;
+			children = (
+				2B29450C1EA543260067FDF7 /* LinkTagViewModel.swift */,
+				2B29450E1EA577090067FDF7 /* LinkTagViewController.swift */,
+			);
+			name = "Link Tags";
+			sourceTree = "<group>";
+		};
 		2BB79E561E9F1482007FB002 = {
 			isa = PBXGroup;
 			children = (
@@ -95,33 +108,18 @@
 			isa = PBXGroup;
 			children = (
 				2BB79E8A1E9F5A69007FB002 /* Homepage */,
+				2BB79E641E9F1482007FB002 /* TagViewController.swift */,
 				2BB79E871E9F5911007FB002 /* Image Tags */,
+				2B2945091EA49FA80067FDF7 /* Link Tags */,
 			);
 			name = "Tag ViewControllers";
-			sourceTree = "<group>";
-		};
-		2BB79E7D1E9F284E007FB002 /* Image ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				2BB79E7A1E9F19C6007FB002 /* ImageTagViewController.swift */,
-			);
-			name = "Image ViewControllers";
-			sourceTree = "<group>";
-		};
-		2BB79E7E1E9F2D84007FB002 /* ImageTag ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2BB79E7F1E9F2DAA007FB002 /* ImageTagViewModel.swift */,
-			);
-			name = "ImageTag ViewModel";
 			sourceTree = "<group>";
 		};
 		2BB79E871E9F5911007FB002 /* Image Tags */ = {
 			isa = PBXGroup;
 			children = (
-				2BB79E641E9F1482007FB002 /* TagViewController.swift */,
-				2BB79E7D1E9F284E007FB002 /* Image ViewControllers */,
-				2BB79E7E1E9F2D84007FB002 /* ImageTag ViewModel */,
+				2BB79E7F1E9F2DAA007FB002 /* ImageTagViewModel.swift */,
+				2BB79E7A1E9F19C6007FB002 /* ImageTagViewController.swift */,
 			);
 			name = "Image Tags";
 			sourceTree = "<group>";
@@ -211,10 +209,12 @@
 				2BB79E821E9F58A1007FB002 /* TagCollectionViewController.swift in Sources */,
 				2BB79E8C1E9F5EDC007FB002 /* DataManager.swift in Sources */,
 				2BB79E6B1E9F1482007FB002 /* tagup.xcdatamodeld in Sources */,
+				2B29450D1EA543260067FDF7 /* LinkTagViewModel.swift in Sources */,
 				2BB79E651E9F1482007FB002 /* TagViewController.swift in Sources */,
 				2BB79E631E9F1482007FB002 /* AppDelegate.swift in Sources */,
 				2BB79E7B1E9F19C6007FB002 /* ImageTagViewController.swift in Sources */,
 				2BB79E801E9F2DAA007FB002 /* ImageTagViewModel.swift in Sources */,
+				2B29450F1EA577090067FDF7 /* LinkTagViewController.swift in Sources */,
 				2BB79E891E9F5A49007FB002 /* TagCellViewModel.swift in Sources */,
 				2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */,
 				2BB79E8E1EA351FB007FB002 /* Extensions.swift in Sources */,

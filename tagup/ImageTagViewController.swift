@@ -31,26 +31,6 @@ class ImageTagViewController: TagViewController {
         return iv
     }()
     
-    // MARK: Editable State UIView Elements
-    lazy var deleteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Delete", for: .normal)
-        button.setTitleColor(UIColor(hex: 0xE84A5F), for: .normal)
-        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor  = UIColor.lightGray.cgColor
-        
-        button.addTarget(self, action: #selector(handleDeleteSelected), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    // MARK: Presentable State UIView Elements
-    lazy var editButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEditSelected))
-        return button
-    }()
-    
     // MARK: Properties
     fileprivate var viewModel: ImageTagViewModel
     // Holds a reference to the presentableState VC for deletion handling
@@ -72,11 +52,15 @@ class ImageTagViewController: TagViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        populateFieldsWithData()
         setupViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        populateFieldsWithData()
+        // only populate the fields with data when currentState is in presentable mode
+        if currentState == .presentable {
+            populateFieldsWithData()
+        }
     }
     
     private func setupViews() {
@@ -112,15 +96,7 @@ class ImageTagViewController: TagViewController {
         notesField.topAnchor.constraint(equalTo: notesLabel.bottomAnchor).isActive = true
         notesField.leftAnchor.constraint(equalTo: notesLabel.leftAnchor).isActive = true
         notesField.rightAnchor.constraint(equalTo: notesLabel.rightAnchor).isActive = true
-        
-        view.addSubview(deleteButton)
-        
-        deleteButton.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        deleteButton.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        deleteButton.topAnchor.constraint(equalTo: notesField.bottomAnchor, constant: 20).isActive = true
-        deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
-        deleteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/10).isActive = true
-        
+        notesField.bottomAnchor.constraint(equalTo: deleteButton.topAnchor, constant: -20).isActive = true
     }
     
     /*
@@ -143,25 +119,8 @@ class ImageTagViewController: TagViewController {
         setupNotesLabelLayout()
         setupNotesViewLayout()
         
-        // Setup navigationBar buttons
-        navigationItem.rightBarButtonItem = editButton
         // Setup fields for presentable state
-        titleField.isEnabled = false
-        notesField.isEditable = false
         uploadImageView.isUserInteractionEnabled = false
-        
-        // Add the delete button to the superview of the scrollview,
-        // keep the delete button on screen at all times
-        view.addSubview(deleteButton)
-        
-        // Repostion scrollview to not extend to the bounds of screen
-        scrollViewBottomAnchor.isActive = false
-        scrollView.bottomAnchor.constraint(equalTo: deleteButton.topAnchor).isActive = true
-        
-        deleteButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        deleteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/10).isActive = true
     }
     
     /*
@@ -216,10 +175,10 @@ extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerC
         dismiss(animated: true, completion: nil)
     }
     
-    func handleEditSelected() {
+    override func handleEditSelected() {
         // Initalize editable stateVC with reference to current VC
-        let imageTagViewController = ImageTagViewController(state: .editable, viewModel: viewModel, presentableVC: self)
-        let nav = UINavigationController(rootViewController: imageTagViewController)
+        let viewController = ImageTagViewController(state: .editable, viewModel: viewModel, presentableVC: self)
+        let nav = UINavigationController(rootViewController: viewController)
         present(nav, animated: true, completion: nil)
     }
     
@@ -230,7 +189,7 @@ extension ImageTagViewController: UINavigationControllerDelegate, UIImagePickerC
         present(picker, animated: true, completion: nil)
     }
     
-    func handleDeleteSelected() {
+    override func handleDeleteSelected() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let deleteButton = UIAlertAction(title: "Delete Tag", style: .destructive) { (action) in

@@ -69,8 +69,13 @@ class TagCollectionViewController: UICollectionViewController {
         switch tag {
         case is ImageTag:
             let viewModel = ImageTagViewModel(imageTag: tag as? ImageTag)
-            let imageTagViewController = ImageTagViewController(state: .presentable, viewModel: viewModel)
-            let nav = UINavigationController(rootViewController: imageTagViewController)
+            let viewController = ImageTagViewController(state: .presentable, viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: viewController)
+            present(nav, animated: true, completion: nil)
+        case is LinkTag:
+            let viewModel = LinkTagViewModel(linkTag: tag as? LinkTag)
+            let viewController = LinkTagViewController(state: .presentable, viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: viewController)
             present(nav, animated: true, completion: nil)
         default:
             print("End of the world if this prints")
@@ -93,13 +98,17 @@ extension TagCollectionViewController {
         let linkButton = UIAlertAction(title: "Link", style: .default) { (action) in
             // link selected
             print("Link selected")
+            let viewModel = LinkTagViewModel(linkTag: nil)
+            let viewController = LinkTagViewController(state: .registration, viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: viewController)
+            self.present(nav, animated: true, completion: nil)
         }
         
         let imageButton = UIAlertAction(title: "Image", style: .default) { (action) in
             // image selected
             let viewModel = ImageTagViewModel(imageTag: nil)
-            let imageTagRegistrationController = ImageTagViewController(state: .registration, viewModel: viewModel)
-            let nav = UINavigationController(rootViewController: imageTagRegistrationController)
+            let viewController = ImageTagViewController(state: .registration, viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: viewController)
             self.present(nav, animated: true, completion: nil)
         }
         

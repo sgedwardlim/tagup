@@ -23,10 +23,16 @@ class TagCellViewModel {
         switch tag {
         case is ImageTag:
             let imageTag = tag as! ImageTag
-            guard let image = imageTag.image else {
+            guard let thumbnailData = imageTag.image else {
                 return #imageLiteral(resourceName: "upload_image_icon")
             }
-            return UIImage(data: image as Data)!
+            return UIImage(data: thumbnailData as Data)!
+        case is LinkTag:
+            let linkTag = tag as! LinkTag
+            guard let thumbnailData = linkTag.image else {
+                return #imageLiteral(resourceName: "upload_image_icon")
+            }
+            return UIImage(data: thumbnailData as Data)!
         default:
             return #imageLiteral(resourceName: "upload_image_icon")
         }

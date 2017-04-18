@@ -16,30 +16,32 @@ class DataManager {
         let delegate = (UIApplication.shared.delegate as! AppDelegate)
         let context = delegate.persistentContainer.viewContext
         
-        var tags: [TagCellViewModel] = []
+        var tagViewModels: [TagCellViewModel] = []
+        
+        
         do {
-            let imageTags = try context.fetch(ImageTag.fetchRequest())
-            for tag in imageTags {
+            // Fetch all tags from the databse
+            let tags = try context.fetch(Tag.fetchRequest())
+            for tag in tags {
                 let viewModel = TagCellViewModel(tag as! Tag)
-                tags.append(viewModel)
+                tagViewModels.append(viewModel)
             }
         } catch {
             print("Fetching ImageTags Failed")
         }
         
-        completion(tags)
+        completion(tagViewModels)
     }
     
-    func saveImageTag(tag: Tag) {
-        let delegate = (UIApplication.shared.delegate as! AppDelegate)
-        delegate.saveContext()
+    func saveTag(_ tag: Tag) {
+        // usually this method should be called to handle saving of data between servers
     }
     
-    func deleteImageTag(_ imageTag: Tag) {
+    func deleteTag(_ tag: Tag) {
         let delegate = (UIApplication.shared.delegate as! AppDelegate)
         let context = delegate.persistentContainer.viewContext
         
-        context.delete(imageTag)
+        context.delete(tag)
         delegate.saveContext()
     }
 }

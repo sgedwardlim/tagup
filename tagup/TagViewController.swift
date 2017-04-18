@@ -18,6 +18,8 @@ import UIKit
     4.) notesField's or last view element (delete button) bottom anchor must be tied to
         contentView's bottomAnchor as such, ex...
         notesField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
+    5.) If currentState is presentable, deletebutton will be placed viewable at all times,
+        if currentState is editable, deleteButton will be placed at the bottom of contentView
  
  */
 class TagViewController: UIScrollViewController {
@@ -36,6 +38,7 @@ class TagViewController: UIScrollViewController {
     let titleField: UITextField = {
         let field = UITextField()
         field.placeholder = "Title"
+        field.backgroundColor = .white
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
@@ -54,6 +57,26 @@ class TagViewController: UIScrollViewController {
         field.layer.borderWidth = 0.5
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
+    }()
+    
+    // MARK: Editable State UIView Elements
+    lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(UIColor(hex: 0xE84A5F), for: .normal)
+        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor  = UIColor.lightGray.cgColor
+        
+        button.addTarget(self, action: #selector(handleDeleteSelected), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    // MARK: Presentable State UIView Elements
+    lazy var editButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEditSelected))
+        return button
     }()
     
     // MARK: Properties
@@ -83,9 +106,64 @@ class TagViewController: UIScrollViewController {
     }
     
     private func setupViews() {
+        // setup navigationButtons
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = saveButton
         
+        // Setup the view based off the current state of the view
+        switch currentState {
+        case .editable:
+            setupEditableStateView()
+        case .presentable:
+            setupPresentableStateView()
+        case .registration:
+            break
+        }
+        
+        setupTitleFieldLayout()
+    }
+    
+    /*
+     *  Sets up how the view will look in an editable state,
+     *  will look exactly the same as the registration state,
+     *  with the exception of a delete button at the bottom of contentView
+     */
+    private func setupEditableStateView() {
+        // Place the delete button as the last item
+        contentView.addSubview(deleteButton)
+        
+        deleteButton.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+        deleteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/10).isActive = true
+    }
+    
+    /*
+     *  Sets up how the view will look in an presentable state,
+     *  every element in the view in this state should be uneditable
+     */
+    private func setupPresentableStateView() {
+        // Setup navigationBar buttons
+        navigationItem.rightBarButtonItem = editButton
+        // Setup fields for presentable state
+        titleField.isEnabled = false
+        notesField.isEditable = false
+        
+        // Add the delete button to the superview of the scrollview,
+        // keep the delete button on screen at all times
+        view.addSubview(deleteButton)
+        
+        // Repostion scrollview to not extend to the bounds of screen
+        scrollViewBottomAnchor.isActive = false
+        scrollView.bottomAnchor.constraint(equalTo: deleteButton.topAnchor).isActive = true
+        
+        deleteButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        deleteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/10).isActive = true
+    }
+    
+    private func setupTitleFieldLayout() {
         contentView.addSubview(titleField)
         
         titleField.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -106,6 +184,14 @@ extension TagViewController {
     }
     
     func handleSaveSelected() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func handleEditSelected() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func handleDeleteSelected() {
         dismiss(animated: true, completion: nil)
     }
 }

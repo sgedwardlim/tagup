@@ -18,14 +18,14 @@ class UIScrollViewController: UIViewController {
     // MARK: UIView Elements
     let scrollView: UIScrollView = {
         let view = UIScrollView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: 0xF9F7F7)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: 0xF9F7F7)
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
