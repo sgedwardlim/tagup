@@ -77,6 +77,11 @@ class TagCollectionViewController: UICollectionViewController {
             let viewController = LinkTagViewController(state: .presentable, viewModel: viewModel)
             let nav = UINavigationController(rootViewController: viewController)
             present(nav, animated: true, completion: nil)
+        case is NoteTag:
+            let viewModel = NoteTagViewModel(noteTag: tag as? NoteTag)
+            let viewController = NoteTagViewController(state: .presentable, viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: viewController)
+            present(nav, animated: true, completion: nil)
         default:
             print("End of the world if this prints")
         }
@@ -114,6 +119,10 @@ extension TagCollectionViewController {
         
         let noteButton = UIAlertAction(title: "Note", style: .default) { (action) in
             // note selected
+            let viewModel = NoteTagViewModel(noteTag: nil)
+            let viewController = NoteTagViewController(state: .registration, viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: viewController)
+            self.present(nav, animated: true, completion: nil)
             print("Note selected")
         }
         

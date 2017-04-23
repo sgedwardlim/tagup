@@ -259,8 +259,6 @@ extension LinkTagViewController: UITextFieldDelegate, UIWebViewDelegate {
                 self.linkPreviewImageViewHeightAnchor?.constraint(equalTo: self.titleField.widthAnchor, multiplier: 2/3).isActive = true
                 self.view.layoutIfNeeded()
             }, completion: nil)
-            
-            
         }
         requestLinkThumbnail()
         view.endEditing(true)

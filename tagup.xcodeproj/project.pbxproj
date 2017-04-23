@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B29450D1EA543260067FDF7 /* LinkTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29450C1EA543260067FDF7 /* LinkTagViewModel.swift */; };
 		2B29450F1EA577090067FDF7 /* LinkTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29450E1EA577090067FDF7 /* LinkTagViewController.swift */; };
+		2B2945121EAA776D0067FDF7 /* NoteTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2945111EAA776D0067FDF7 /* NoteTagViewModel.swift */; };
+		2BB6B3531EAA9D0D0077C279 /* NoteTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6B3521EAA9D0D0077C279 /* NoteTagViewController.swift */; };
 		2BB79E631E9F1482007FB002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E621E9F1482007FB002 /* AppDelegate.swift */; };
 		2BB79E651E9F1482007FB002 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E641E9F1482007FB002 /* TagViewController.swift */; };
 		2BB79E6B1E9F1482007FB002 /* tagup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79E691E9F1482007FB002 /* tagup.xcdatamodeld */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		2B29450C1EA543260067FDF7 /* LinkTagViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkTagViewModel.swift; sourceTree = "<group>"; };
 		2B29450E1EA577090067FDF7 /* LinkTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkTagViewController.swift; sourceTree = "<group>"; };
+		2B2945111EAA776D0067FDF7 /* NoteTagViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTagViewModel.swift; sourceTree = "<group>"; };
+		2BB6B3521EAA9D0D0077C279 /* NoteTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTagViewController.swift; sourceTree = "<group>"; };
 		2BB79E5F1E9F1482007FB002 /* tagup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tagup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BB79E621E9F1482007FB002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BB79E641E9F1482007FB002 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +66,15 @@
 				2B29450E1EA577090067FDF7 /* LinkTagViewController.swift */,
 			);
 			name = "Link Tags";
+			sourceTree = "<group>";
+		};
+		2B2945101EAA774C0067FDF7 /* Notes Tags */ = {
+			isa = PBXGroup;
+			children = (
+				2B2945111EAA776D0067FDF7 /* NoteTagViewModel.swift */,
+				2BB6B3521EAA9D0D0077C279 /* NoteTagViewController.swift */,
+			);
+			name = "Notes Tags";
 			sourceTree = "<group>";
 		};
 		2BB79E561E9F1482007FB002 = {
@@ -109,6 +122,7 @@
 			children = (
 				2BB79E8A1E9F5A69007FB002 /* Homepage */,
 				2BB79E641E9F1482007FB002 /* TagViewController.swift */,
+				2B2945101EAA774C0067FDF7 /* Notes Tags */,
 				2BB79E871E9F5911007FB002 /* Image Tags */,
 				2B2945091EA49FA80067FDF7 /* Link Tags */,
 			);
@@ -217,8 +231,10 @@
 				2B29450F1EA577090067FDF7 /* LinkTagViewController.swift in Sources */,
 				2BB79E891E9F5A49007FB002 /* TagCellViewModel.swift in Sources */,
 				2BB79E781E9F14F0007FB002 /* UIScrollViewController.swift in Sources */,
+				2B2945121EAA776D0067FDF7 /* NoteTagViewModel.swift in Sources */,
 				2BB79E8E1EA351FB007FB002 /* Extensions.swift in Sources */,
 				2BB79E841E9F58A8007FB002 /* TagCell.swift in Sources */,
+				2BB6B3531EAA9D0D0077C279 /* NoteTagViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
